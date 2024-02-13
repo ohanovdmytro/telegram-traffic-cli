@@ -1,0 +1,20 @@
+{
+  "name": "telegram-traffic-cli",
+  "version": "1.0.0",
+  "description": "",
+  "main": "pars.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "sms": "node smsbot members.csv",
+    "pars": "node pars"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.4.2",
+    "input": "^1.0.1",
+    "readline": "^1.3.0",
+    "telegram": "^2.19.10"
+  }
+}
