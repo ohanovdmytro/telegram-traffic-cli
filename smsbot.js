@@ -66,15 +66,16 @@ const stringSession = new StringSession("");
         console.log("[+] Sending Message to:", user.name);
         await client.sendMessage(receiver, {
           message: message.replace("{name}", user.name),
-        });
+          parsMode: 'html',
+        } );
         console.log("[+] Waiting 1.5 seconds");
         await new Promise((resolve) => setTimeout(resolve, 1500));
         messageCounter++;
 
-        // Check if 10 messages have been sent, if so, wait for 470 seconds
-        if (messageCounter % 10 === 0) {
-          console.log("[+] Sent to 10 people. Waiting 470 seconds...");
-          await new Promise((resolve) => setTimeout(resolve, 470000));
+        // Check if 10 messages have been sent, if so, wait for 480 seconds
+        if (messageCounter % 7 === 0) {
+          console.log("[+] Sent to 7 people. Waiting 480 seconds...");
+          await new Promise((resolve) => setTimeout(resolve, 48000));
         }
       } catch (e) {
         console.log("[!] Error:", e);
