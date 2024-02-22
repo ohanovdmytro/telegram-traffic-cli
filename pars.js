@@ -25,6 +25,8 @@ const pars = async () => {
 
   console.log("You should now be connected.");
 
+  
+
   const chats = await client.getDialogs();
   const groups = chats.filter((chat) => chat.isGroup);
 

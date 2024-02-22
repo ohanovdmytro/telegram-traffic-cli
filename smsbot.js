@@ -1,5 +1,6 @@
 const { TelegramClient } = require("telegram");
-const { StringSession } = require("telegram/sessions");
+// const { StringSession } = require("telegram/sessions");
+const { StoreSession } = require("telegram/sessions");
 const input = require("input");
 const fs = require("fs");
 require("dotenv").config();
@@ -8,12 +9,12 @@ const apiId = Number(process.env.API_ID);
 const apiHash = `${process.env.API_HASH}`;
 const phoneNumber = process.env.NUMBER;
 
-const stringSession = new StringSession("");
+const session = new StoreSession("my_session");
 
 (async () => {
   try {
     console.log("Loading interactive example...");
-    const client = new TelegramClient(stringSession, apiId, apiHash, {
+    const client = new TelegramClient(session, apiId, apiHash, {
       connectionRetries: 5,
     });
 
@@ -24,6 +25,8 @@ const stringSession = new StringSession("");
         await input.text("Please enter the code you received: "),
       onError: (err) => console.log(err),
     });
+
+    client.setParseMode("html");
 
     console.log("You should now be connected.");
 
@@ -60,14 +63,16 @@ const stringSession = new StringSession("");
         process.exit(1);
       }
 
-      const message = users.indexOf(user) % 2 === 0 ? fs.readFileSync("message1.txt", "utf8") : fs.readFileSync("message2.txt", "utf8");
+      const message =
+        users.indexOf(user) % 2 === 0
+          ? fs.readFileSync("message1.txt", "utf8")
+          : fs.readFileSync("message2.txt", "utf8");
 
       try {
         console.log("[+] Sending Message to:", user.name);
         await client.sendMessage(receiver, {
           message: message.replace("{name}", user.name),
-          parsMode: 'html',
-        } );
+        });
         console.log("[+] Waiting 1.5 seconds");
         await new Promise((resolve) => setTimeout(resolve, 1500));
         messageCounter++;
