@@ -2,7 +2,7 @@ node_modules
 .env
 .txt
 .csv
-members.csv
-message2.txt
-message1.txt
-my_session
+/members.csv
+/message2.txt
+/message1.txt
+/my_session
